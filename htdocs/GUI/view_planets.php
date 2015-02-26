@@ -76,6 +76,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 		echo '<td><a href="./index.php?v=planet&amp;id=' . $planet->id . '">Details</a> / <a href="./index.php?v=planetbahn&amp;id=' . $planet->id . '">Bahn</a></td>';
 		echo '</tr>';
 	}
+	unset ( $array );
 	echo '</table><br/>';
 }
 ?>
