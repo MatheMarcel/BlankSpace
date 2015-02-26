@@ -59,6 +59,7 @@ if ($player->id != 0) {
 			}
 		}
 	}
+	unset ( $starsystem );
 	echo '</table>';
 	echo '</td></tr></table>';
 }
