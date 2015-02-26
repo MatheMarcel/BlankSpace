@@ -39,7 +39,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 	if ($_SESSION ['gameuserid'] != 0) {
 		$player = 0;
 		$player = new player ( $_SESSION ['gameuserid'] );
-		include ("header.php");
+		include ("GUI/header.php");
 		
 		// Spezies aufgeben und neu beginnen
 		if (isset ( $_GET ['restart'] )) {
@@ -84,23 +84,23 @@ if ($_SERVER ['HTTPS'] == "on") {
 		}
 		
 		if ($view == "technol") {
-			include ("view_technol.php");
+			include ("GUI/view_technol.php");
 		} elseif ($view == "planets") {
-			include ("view_planets.php");
+			include ("GUI/view_planets.php");
 		} elseif ($view == "planet") {
-			include ("view_planet.php");
+			include ("GUI/view_planet.php");
 		} elseif ($view == "planetbahn") {
-			include ("view_planetbahn.php");
+			include ("GUI/view_planetbahn.php");
 		} elseif ($view == "starsys") {
-			include ("view_starsystem.php");
+			include ("GUI/view_starsystem.php");
 		} elseif ($view == "unittypes") {
-			include ("view_unit_types.php");
+			include ("GUI/view_unit_types.php");
 		} elseif ($view == "newunittype") {
-			include ("view_new_unit_type.php");
+			include ("GUI/view_new_unit_type.php");
 		} elseif ($view == "admin") {
-			include ("view_admin.php");
+			include ("GUI/view_admin.php");
 		} else {
-			include ("view_overview.php");
+			include ("GUI/view_overview.php");
 		}
 		
 		echo '<hr/>';
