@@ -11,7 +11,7 @@ session_start ()?>
 
 <?php
 if ($_SERVER ['HTTPS'] == "on") {
-	include ("dbconnect.php");
+	include ("../dbconnect.php");
 	if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 		$username = "";
 		$username = htmlspecialchars ( $_POST ['username'] );
@@ -26,13 +26,13 @@ if ($_SERVER ['HTTPS'] == "on") {
 			$saltedPassword = $result ['password'];
 			$salt = substr ( $saltedPassword, 0, 12 );
 			$hash = substr ( $saltedPassword, 12 );
-			$globsalt = 'H7z6QDV>l6@u';
+			$globsalt = 'new salt already installed:P';
 			$pass = hash ( 'whirlpool', $globsalt . $password . $salt );
 			
 			if ($pass == $hash) {
 				$_SESSION ['gameusername'] = $username;
 				$_SESSION ['gameuserid'] = $result ['id'];
-				echo 'Login erfolgreich. Willkommen ' . $username . '. <a href="./index.php">Zum Spiel</a>';
+				echo 'Login erfolgreich. Willkommen ' . $username . '. <a href="../index.php">Zum Spiel</a>';
 				
 				$rando = hash ( 'whirlpool', substr ( uniqid ( rand (), true ), 0, 30 ) );
 				$cook = mysqli_query ( $dblink, "INSERT INTO game_players_cookies (id,cookie,date) VALUES (" . mysqli_real_escape_string ( $dblink, $_SESSION ['gameuserid'] ) . ", \"" . $rando . "\", NOW())" );
@@ -44,7 +44,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 		}
 	}
 } else {
-	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/login.php\">verschlüsselte Webseite</a>";
+	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/user/login.php\">verschlüsselte Webseite</a>";
 }
 ?>
 </body>

@@ -18,7 +18,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 	echo "<input type=\"submit\" value=\"Anmelden\" />";
 	echo '</form><br/><br/>Sie haben keine Login-Daten? Wollen Sie sich registrieren? <a href="./register.php">Registrieren</a>';
 } else {
-	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/login.php\">verschlüsselte Webseite</a>";
+	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/user/login.php\">verschlüsselte Webseite</a>";
 }
 ?>
 </body>

@@ -18,7 +18,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 	echo "<input type=\"submit\" value=\"neues Passwort speichern\" />";
 	echo "</form>";
 } else {
-	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/verifyemail.php\">verschlüsselte Webseite</a>";
+	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/user/verifyemail.php\">verschlüsselte Webseite</a>";
 }
 ?>
 </body>

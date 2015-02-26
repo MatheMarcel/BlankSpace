@@ -11,7 +11,7 @@ session_start ()?>
 
 <?php
 if ($_SERVER ['HTTPS'] == "on") {
-	include ("dbconnect.php");
+	include ("../dbconnect.php");
 	if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 		$pwcusername = htmlspecialchars ( $_POST ['pwcusername'] );
 		$pwccode = htmlspecialchars ( $_POST ['pwccode'] );
@@ -27,14 +27,14 @@ if ($_SERVER ['HTTPS'] == "on") {
 			echo "Passwort zu kurz. Bitte mehr als 5 Zeichen wählen!";
 		} else {
 			$salt = substr ( hash ( 'whirlpool', substr ( uniqid ( rand (), true ), 0, 12 ) ), 0, 12 );
-			$globsalt = 'H7z6QDV>l6@u';
+			$globsalt = 'new salt already installed :P';
 			$pwcpassword = hash ( 'whirlpool', $globsalt . $pwcpassword . $salt );
 			$result = mysqli_query ( $dblink, "UPDATE game_players set password=\"" . $salt . $pwcpassword . "\", pwchange=\"-\" WHERE id=" . $result ['id'] );
 			echo "Passwort erfolgreich geändert.";
 		}
 	}
 } else {
-	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/verifyemail.php\">verschlüsselte Webseite</a>";
+	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/user/verifyemail.php\">verschlüsselte Webseite</a>";
 }
 ?>
 </body>

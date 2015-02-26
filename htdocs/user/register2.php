@@ -11,7 +11,7 @@ session_start ()?>
 
 <?php
 if ($_SERVER ['HTTPS'] == "on") {
-	include ("dbconnect.php");
+	include ("../dbconnect.php");
 	if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 		$regusername = htmlspecialchars ( $_POST ['regusername'] );
 		$regemail = htmlspecialchars ( $_POST ['regemail'] );
@@ -33,7 +33,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 			$text = "Nachricht vom FS-Game:
 
 Am $datum wurde ein Benutzer mit dem Usernamen $regusername und mit Ihrer Email angelegt.
-Bitte besuchen Sie die Seite https://fsmath.mathematik.tu-dortmund.de/game/verifyemail.php und geben Sie folgenden Code ein:
+Bitte besuchen Sie die Seite https://fsmath.mathematik.tu-dortmund.de/game/user/verifyemail.php und geben Sie folgenden Code ein:
 
 $pwchange
 
@@ -48,7 +48,7 @@ $pwchange
 		}
 	}
 } else {
-	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/register.php\">verschlüsselte Webseite</a>";
+	echo "Achtung: Nutzen Sie verschlüsselte Übertragung! <a href=\"https://fsmath.mathematik.tu-dortmund.de/game/user/register.php\">verschlüsselte Webseite</a>";
 }
 ?>
 </body>
