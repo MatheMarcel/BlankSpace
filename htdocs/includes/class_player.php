@@ -191,6 +191,7 @@ class player {
 	}
 	function del_log($log_id) {
 		if ($this - id != 0) {
+			global $dblink;			
 			$query = mysqli_query ( $dblink, 'DELETE FROM game_players_log WHERE id=' . $log_id . ' AND player_id=' . $this->id . ' LIMIT 1' );
 		}
 	}

@@ -24,6 +24,7 @@ class building_type {
 	function list_dep() {
 		$list = array ();
 		if ($this->id != 0) {
+			global $dblink;			
 			$query = mysqli_query ( $dblink, 'SELECT depends_on_id FROM game_building_dep WHERE building_id=' . $this->id );
 			while ( $row = mysqli_fetch_array ( $query ) ) {
 				$a = new building_type ( $row ['depends_on_id'] );
@@ -39,6 +40,7 @@ class building_type {
 	function list_techdep() {
 		$list = array ();
 		if ($this->id != 0) {
+			global $dblink;			
 			$query = mysqli_query ( $dblink, 'SELECT tech_id FROM game_building_techdep WHERE building_id=' . $this->id );
 			while ( $row = mysqli_fetch_array ( $query ) ) {
 				$a = new tech ( $row ['tech_id'] );
