@@ -177,7 +177,7 @@ if ($_SERVER ['HTTPS'] == "on") {
 		
 		echo '</tr></table>';
 	} else {
-		echo 'Please log in! <a href="./login.php">Login</a>';
+		echo 'Please log in! <a href="./user/login.php">Login</a>';
 	}
 } else {
 	echo 'Please use an encrypted connection! <a href="https://fsmath.mathematik.tu-dortmund.de/game/">Link to encrypted website.</a>';

@@ -24,7 +24,7 @@ if ($player->id != 0) {
 	echo '<td><a href="./index.php?v=planets">Meine Planeten</a></td>';
 	echo '<td><a href="./index.php?v=unittypes">Meine Einheitentypen</a></td>';
 	echo '<td><a href="./index.php?v=technol">Meine Technologien</a></td>';
-	echo '<td><a href="./wiki/">Wiki</a></td>';
+//	echo '<td><a href="./wiki/">Wiki</a></td>';
 	echo '<td><a href="./index.php?v=admin">Admin</a></td>';
 	echo '</tr></table>';
 	
