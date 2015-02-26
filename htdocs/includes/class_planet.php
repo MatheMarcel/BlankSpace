@@ -1,6 +1,7 @@
 <?php
 class planet {
 	public $id = 0;
+	public $name = "0";
 	public $starsystem_id = 0;
 	public $pos_x = 0;
 	public $pos_y = 0;
@@ -20,6 +21,7 @@ class planet {
 			if (mysqli_num_rows ( $array ) == 1) {
 				$array = mysqli_fetch_array ( $array );
 				$this->id = $array ["id"];
+				$this->name = "".$array ["id"];
 				$this->starsystem_id = $array ["starsystem_id"];
 				$this->pos_x = $array ["pos_x"];
 				$this->pos_y = $array ["pos_y"];

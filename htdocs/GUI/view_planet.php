@@ -1,27 +1,27 @@
 <?php
 if ($_SESSION ['gameuserid'] != 0) {
 	$id = htmlspecialchars ( $_GET ['id'] );
-	$waszusehen = FALSE;
+	$loggedIn = FALSE;
 	$planet = new planet ( $id );
 	if ($planet->player_id == $_SESSION ['gameuserid']) {
-		$waszusehen = TRUE;
+		$loggedIn = TRUE;
 	}
-	if ($waszusehen) {
+	if ($loggedIn) {
 		if (isset ( $_GET {'buildid'} )) {
 			$buildid = htmlspecialchars ( $_GET {'buildid'} );
-			// prüfe ob bau möglich
+			// test if building can be constructed
 			
 			$planet->add_construction ( 'building', $buildid );
 		}
 		if (isset ( $_GET {'moduleid'} )) {
 			$moduleid = htmlspecialchars ( $_GET {'moduleid'} );
-			// prüfe ob bau möglich
+			// test if module can be constructed
 			
 			$planet->add_construction ( 'module', $moduleid );
 		}
 		if (isset ( $_GET {'build_unitid'} )) {
 			$unitid = htmlspecialchars ( $_GET {'build_unitid'} );
-			// prüfe ob bau möglich
+			// test if unit can be constructed
 			
 			$planet->add_construction ( 'unit', $unitid );
 			$planet->add_planet_mission ( 1, $unitid, 1 );
@@ -64,7 +64,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 			}
 		}
 		
-		echo 'Zeige Details von Planet ' . $planet->id . '<br/>';
+		echo 'Zeige Details von Planet ' . $planet->name . '<br/>';
 		
 		echo 'Bauliste:<br/>';
 		$list = $planet->constructions ();
