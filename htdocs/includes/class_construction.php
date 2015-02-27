@@ -34,6 +34,7 @@ class construction {
 	}
 	function __destruct() {
 		if ($this->id != 0) {
+			global $dblink;
 			$query = '';
 			$query = mysqli_query ( $dblink, 'UPDATE game_planets_construction SET prev_priority=' . $this->prev_id . ',next_priority=' . $this->next_id . ',status_id=' . $this->status_id . ',constructed=' . $this->points . ' WHERE id=' . $this->id );
 		}
