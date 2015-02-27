@@ -8,12 +8,12 @@ class player {
 	function __construct($playerid) {
 		global $dblink;
 		if ($playerid != 0) {
-			$array = mysqli_query ( $dblink, 'SELECT id,name,rundefertig,home_id,clan_id FROM game_players WHERE id=' . $playerid );
+			$array = mysqli_query ( $dblink, 'SELECT id,name,rounddone,home_id,clan_id FROM game_players WHERE id=' . $playerid );
 			if (mysqli_num_rows ( $array ) == 1) {
 				$array = mysqli_fetch_array ( $array );
 				$this->id = $array ["id"];
 				$this->name = $array ["name"];
-				$this->rounddone = $array ["rundefertig"];
+				$this->rounddone = $array ["rounddone"];
 				$this->homeplanet = $array ["home_id"];
 				$this->clan = new clan ( $array ["clan_id"] );
 			}

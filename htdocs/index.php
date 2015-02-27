@@ -105,12 +105,14 @@ if ($_SERVER ['HTTPS'] == "on") {
 		
 		echo '<hr/>';
 		
-		if (isset ( $_GET ['rundefertig'] )) {
+		if (isset ( $_GET ['rounddone'] )) {
 			$rundefertig = "";
-			$rundefertig = htmlspecialchars ( $_GET ['rundefertig'] );
+			$rundefertig = htmlspecialchars ( $_GET ['rounddone'] );
 			
 			$set = "";
-			$set = mysqli_query ( $dblink, 'UPDATE game_players SET rundefertig = 1 WHERE id=' . $_SESSION ['gameuserid'] );
+			if (!mysqli_query ( $dblink, 'UPDATE game_players SET rounddone = 1 WHERE id=' . $_SESSION ['gameuserid'] )) {
+				echo "could not set rounddone";
+			}
 			
 			include ("cronjob.php");
 		}
