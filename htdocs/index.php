@@ -160,10 +160,10 @@ if ($_SERVER ['HTTPS'] == "on") {
 		$rounddone = mysqli_query ( $dblink, 'SELECT id, name, rounddone FROM game_players' );
 		while ( $zeile = mysqli_fetch_object ( $rounddone ) ) {
 			echo '<tr><td align="center">' . $zeile->name . '</td>';
-			if ($zeile->rundefertig == "0") {
+			if ($zeile->rounddone == "0") {
 				echo '<td>nein';
 				if ($zeile->id == $_SESSION ['gameuserid']) {
-					echo ' <a href="./index.php?rundefertig=1">Runde beenden?</a>';
+					echo ' <a href="./index.php?rounddone=1">Runde beenden?</a>';
 				}
 				echo '</td>';
 			} else {

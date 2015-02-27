@@ -30,15 +30,9 @@ if ($nextrunde) {
 	$round = mysqli_fetch_array (mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="Round"' )) ['value'];
 	
 	$round ++;
-	if (!mysqli_query ( $dblink, 'UPDATE game_master SET wert="' . $round . '" WHERE variable="Round"' )) {
-		echo 'could not update database value Round to ' . $round . '</br>';
-	}
-	if (!mysqli_query ( $dblink, 'UPDATE game_master SET wert="' . time () . '" WHERE variable="LastRound"' )) {
-		echo 'could not update database value LastRound to ' . time () . '</br>';
-	}
-	if (!mysqli_query ( $dblink, 'INSERT INTO game_round (nummer,beginn) VALUES (' . $round . ',' . time () . ')' )) {
-		echo 'could not update database value game_round (nummer,beginn) to (' . $round . ',' . time () . ')</br>';
-	}
+	mysqli_query ( $dblink, 'UPDATE game_master SET wert="' . $round . '" WHERE variable="Round"' );
+	mysqli_query ( $dblink, 'UPDATE game_master SET wert="' . time () . '" WHERE variable="LastRound"' );
+	mysqli_query ( $dblink, 'INSERT INTO game_round (nummer,beginn) VALUES (' . $round . ',' . time () . ')' );
 	
 	$abf = mysqli_query ( $dblink, 'UPDATE game_players SET rounddone = "0"' );
 	
