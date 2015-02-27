@@ -13,25 +13,23 @@ class construction {
 	function __construct($construction_id) {
 		global $dblink;
 		$query = mysqli_query ( $dblink, 'SELECT id, planet_id, building_id, module_id, prev_priority, next_priority, constructed, status_id FROM game_planets_construction WHERE id=' . $construction_id );
-		if (is_resource ( $query )) {
-			if (mysqli_num_rows ( $query ) == 1) {
-				$query = mysqli_fetch_array ( $query );
-				$this->id = $query ['id'];
-				$this->planet_id = $query ['planet_id'];
-				$this->building_type = new building_type ( $query ['building_id'] );
-				$this->module_type = new module_type ( $query ['module_id'] );
-				if ($query ['building_id'] != 0) {
-					$this->name = $this->building_type->name;
-					$this->cost = $this->building_type->cost;
-				} elseif ($query ['module_id'] != 0) {
-					$this->name = $this->module_type->name;
-					$this->cost = $this->module_type->cost;
-				}
-				$this->prev_id = $query ['prev_priority'];
-				$this->next_id = $query ['next_priority'];
-				$this->status_id = $query ['status_id'];
-				$this->points = $query ['constructed'];
+		if (mysqli_num_rows ( $query ) == 1) {
+			$query = mysqli_fetch_array ( $query );
+			$this->id = $query ['id'];
+			$this->planet_id = $query ['planet_id'];
+			$this->building_type = new building_type ( $query ['building_id'] );
+			$this->module_type = new module_type ( $query ['module_id'] );
+			if ($query ['building_id'] != 0) {
+				$this->name = $this->building_type->name;
+				$this->cost = $this->building_type->cost;
+			} elseif ($query ['module_id'] != 0) {
+				$this->name = $this->module_type->name;
+				$this->cost = $this->module_type->cost;
 			}
+			$this->prev_id = $query ['prev_priority'];
+			$this->next_id = $query ['next_priority'];
+			$this->status_id = $query ['status_id'];
+			$this->points = $query ['constructed'];
 		}
 	}
 	function __destruct() {
