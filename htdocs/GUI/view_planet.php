@@ -1,24 +1,27 @@
 <?php
 if ($_SESSION ['gameuserid'] != 0) {
 	$id = htmlspecialchars ( $_GET ['id'] );
-	$loggedIn = FALSE;
+	$isOwnerOfPlanet = FALSE;
 	$planet = new planet ( $id );
 	if ($planet->player_id == $_SESSION ['gameuserid']) {
-		$loggedIn = TRUE;
+		$isOwnerOfPlanet = TRUE;
 	}
-	if ($loggedIn) {
+	// only owner of planet can see details
+	// TODO: anyone with satellite or intel antennas can see details
+	if ($isOwnerOfPlanet) {
+		// player wants to build a building
 		if (isset ( $_GET {'buildid'} )) {
 			$buildid = htmlspecialchars ( $_GET {'buildid'} );
-			// test if building can be constructed
-			
+			// TODO: test if building can be constructed
 			$planet->add_construction ( 'building', $buildid );
 		}
+		// player wants to build a module
 		if (isset ( $_GET {'moduleid'} )) {
 			$moduleid = htmlspecialchars ( $_GET {'moduleid'} );
-			// test if module can be constructed
-			
+			// TODO: test if module can be constructed
 			$planet->add_construction ( 'module', $moduleid );
 		}
+		// player wants to build an unit
 		if (isset ( $_GET {'build_unitid'} )) {
 			$unitid = htmlspecialchars ( $_GET {'build_unitid'} );
 			// test if unit can be constructed
@@ -27,6 +30,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 			$planet->add_planet_mission ( 1, $unitid, 1 );
 		}
 		
+		// player wants to change priority
 		if (isset ( $_GET ['prior'] )) {
 			$prior = htmlspecialchars ( $_GET ['prior'] );
 			if (isset ( $_GET ['buildingid'] )) {
@@ -95,6 +99,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 				}
 				echo '</td></tr>';
 			}
+			unset ( $list );
 			echo '</table><br/>';
 		} else {
 			echo 'Keine Gebäude in Bau.';
@@ -106,11 +111,13 @@ if ($_SESSION ['gameuserid'] != 0) {
 		foreach ( $list as $row ) {
 			echo '<tr><td>' . $row->name . '</td><td align="center">' . $row->cost . '</td><td><a href="./index.php?v=planet&amp;id=' . $id . '&amp;buildid=' . $row->id . '">Bauen</a></td></tr>';
 		}
+		unset ( $list );
 		echo '<tr><th>Module</th><th>Kosten</th><th></th></tr>';
 		$list = $planet->module_possible ();
 		foreach ( $list as $row ) {
 			echo '<tr><td>' . $row->name . '</td><td align="center">' . $row->cost . '</td><td><a href="./index.php?v=planet&amp;id=' . $id . '&amp;moduleid=' . $row->id . '">Bauen</a></td></tr>';
 		}
+		unset ( $list );
 		echo '<tr><th>Baupläne</th><th>Kosten</th><th></th></tr>';
 		$list = $planet->unit_possible ();
 		foreach ( $list as $row ) {
@@ -118,6 +125,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 				echo '<tr><td>' . $row->name . '</td><td align="center">' . $row->cost () . '</td><td><a href="./index.php?v=planet&amp;id=' . $id . '&amp;build_unitid=' . $row->id . '">Bauen</a></td></tr>';
 			}
 		}
+		unset ( $list );
 		echo '</table><br/>';
 		
 		echo 'Vorhandene Gebäude:';
@@ -133,6 +141,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 			echo '<tr><td>' . $row->building_type->name . '</td><td>' . $row->hp . '</td><td>' . $row->status_id . '</td><td align="center">' . $row->building_type->capacity . '</td><td>' . $fracht . '</td></tr>';
 			$anzahl ++;
 		}
+		unset ( $list );
 		if ($anzahl < 1) {
 			echo '<tr><td colspan=1>-</td></tr>';
 		}
@@ -146,6 +155,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 			echo '<tr><td>' . $row->unit_type->name . '</td><td>' . $row->hp . '</td><td>-</td></td></tr>';
 			$anzahl ++;
 		}
+		unset ( $list );
 		if ($anzahl < 1) {
 			echo '<tr><td colspan=1>-</td></tr>';
 		}
@@ -182,6 +192,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 				echo '<a href="./index.php?v=planet&amp;id=' . $id . '&amp;prior=del&amp;missionid=' . $row->id . '"><img src="./pics/icons/Process-stop.svg" height="24"/></a>';
 				echo '</td><td>' . $row->times . '</td></tr>';
 			}
+			unset ( $mlist );
 			echo '</table><br/>';
 		} else {
 			echo 'Keine Missionen vorhanden.<br/><br/>';
@@ -201,6 +212,7 @@ if ($_SESSION ['gameuserid'] != 0) {
 				echo '<option value="' . $row->id . '">' . $row->name . '</option>';
 			}
 		}
+		unset ( $list );
 		echo '</select><input type="submit" value=" Einfügen "/>';
 		echo '</form>';
 	} else {
