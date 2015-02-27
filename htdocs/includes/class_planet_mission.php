@@ -11,26 +11,25 @@ class planet_mission {
 	function __construct($planet_mission_id) {
 		global $dblink;
 		$query = mysqli_query ( $dblink, 'SELECT id, planet_id, mission_id, object_id, prev_priority, next_priority, times FROM game_planets_mission WHERE id=' . $planet_mission_id );
-		if (is_resource ( $query )) {
-			if (mysqli_num_rows ( $query ) == 1) {
-				$query = mysqli_fetch_array ( $query );
-				$this->id = $query ['id'];
-				$this->planet_id = $query ['planet_id'];
-				$this->mission_id = $query ['mission_id'];
-				if ($this->mission_id == 1) {
-					$this->name = 'Zusammensetzen nach Bauplan';
-				} elseif ($this->mission_id == 2) {
-					$this->name = 'Startrampe beladen';
-				}
-				$this->object_id = $query ['object_id'];
-				$this->prev_id = $query ['prev_priority'];
-				$this->next_id = $query ['next_priority'];
-				$this->times = $query ['times'];
+		if (mysqli_num_rows ( $query ) == 1) {
+			$query = mysqli_fetch_array ( $query );
+			$this->id = $query ['id'];
+			$this->planet_id = $query ['planet_id'];
+			$this->mission_id = $query ['mission_id'];
+			if ($this->mission_id == 1) {
+				$this->name = 'Zusammensetzen nach Bauplan';
+			} elseif ($this->mission_id == 2) {
+				$this->name = 'Startrampe beladen';
 			}
+			$this->object_id = $query ['object_id'];
+			$this->prev_id = $query ['prev_priority'];
+			$this->next_id = $query ['next_priority'];
+			$this->times = $query ['times'];
 		}
 	}
 	function __destruct() {
 		if ($this->id != 0) {
+			global $dblink;
 			$query = '';
 			$query = mysqli_query ( $dblink, 'UPDATE game_planets_mission SET prev_priority=' . $this->prev_id . ',next_priority=' . $this->next_id . ',times=' . $this->times . ' WHERE id=' . $this->id );
 		}
@@ -47,7 +46,8 @@ class planet_mission {
 				$next->prev_id = $this->prev_id;
 				unset ( $next );
 			}
-			
+
+			global $dblink;
 			$del = '';
 			$del = mysqli_query ( $dblink, 'DELETE FROM game_planets_mission WHERE id=' . $this->id );
 			$this->id = 0;
