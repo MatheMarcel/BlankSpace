@@ -114,6 +114,7 @@ class construction {
 				unset ( $next );
 			}
 			
+			global $dblink;
 			$del = '';
 			$del = mysqli_query ( $dblink, 'DELETE FROM game_planets_construction WHERE id=' . $this->id );
 			$this->id = 0;
