@@ -106,8 +106,8 @@ if ($_SERVER ['HTTPS'] == "on") {
 		echo '<hr/>';
 		
 		if (isset ( $_GET ['rounddone'] )) {
-			$rundefertig = "";
-			$rundefertig = htmlspecialchars ( $_GET ['rounddone'] );
+			$rounddone = "";
+			$rounddone = htmlspecialchars ( $_GET ['rounddone'] );
 			
 			$set = "";
 			if (!mysqli_query ( $dblink, 'UPDATE game_players SET rounddone = 1 WHERE id=' . $_SESSION ['gameuserid'] )) {
@@ -156,9 +156,9 @@ if ($_SERVER ['HTTPS'] == "on") {
 		echo '<td>';
 		// Liste der Spieler, Möglichkeit Runde zu beenden
 		echo '<table border=1><tr><th>Spieler</th><th>Runde beendet</th></tr>';
-		$rundefertig = "";
-		$rundefertig = mysqli_query ( $dblink, 'SELECT id, name, rundefertig FROM game_players' );
-		while ( $zeile = mysqli_fetch_object ( $rundefertig ) ) {
+		$rounddone = "";
+		$rounddone = mysqli_query ( $dblink, 'SELECT id, name, rounddone FROM game_players' );
+		while ( $zeile = mysqli_fetch_object ( $rounddone ) ) {
 			echo '<tr><td align="center">' . $zeile->name . '</td>';
 			if ($zeile->rundefertig == "0") {
 				echo '<td>nein';
