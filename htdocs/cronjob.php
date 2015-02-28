@@ -17,7 +17,8 @@ $nextround = "";
 $nextround = mysqli_query ( $dblink, 'SELECT wert FROM game_master WHERE variable="NextRound"' );
 $nextround = mysqli_fetch_array ( $nextround );
 //does not work: $nextround = mysqli_fetch_array ( mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="NextRound"' )) ['value'];
-if (time () > $lastround + ($nextround * 60)) {
+if (time () > $lastround ['wert'] + ($nextround ['wert'] * 60)) {
+//if (time () > $lastround + ($nextround * 60)) {
 	$nextrunde = TRUE;
 }
 
