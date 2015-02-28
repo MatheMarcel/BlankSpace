@@ -5,7 +5,7 @@ class master {
 	public $nextround = 0;
 	function __construct() {
 		global $dblink;
-		$array = mysqli_query ( $dblink, 'SELECT wert FROM game_master WHERE variable="Runde"' );
+		$array = mysqli_query ( $dblink, 'SELECT wert FROM game_master WHERE variable="Round"' );
 		$array = mysqli_fetch_array ( $array );
 		$this->round = $array ["wert"];
 		
