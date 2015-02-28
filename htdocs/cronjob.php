@@ -10,9 +10,13 @@ $nextrunde = "";
 $nextrunde = FALSE;
 
 $lastround = "";
-$lastround = mysqli_fetch_array ( mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="LastRound"' )) ['value'];
+$lastround = mysqli_query ( $dblink, 'SELECT wert FROM game_master WHERE variable="LastRound"' );
+$lastround = mysqli_fetch_array ( $lastround );
+//does not work: $lastround = mysqli_fetch_array ( mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="LastRound"' )) ['value'];
 $nextround = "";
-$nextround = mysqli_fetch_array ( mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="NextRound"' )) ['value'];
+$nextround = mysqli_query ( $dblink, 'SELECT wert FROM game_master WHERE variable="NextRound"' );
+$nextround = mysqli_fetch_array ( $nextround );
+//does not work: $nextround = mysqli_fetch_array ( mysqli_query ( $dblink, 'SELECT value FROM game_master WHERE variable="NextRound"' )) ['value'];
 if (time () > $lastround + ($nextround * 60)) {
 	$nextrunde = TRUE;
 }
